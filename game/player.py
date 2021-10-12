@@ -31,7 +31,7 @@ class Player:
         
         action = bargainAccepted
 
-        self.qinit[bargainIndexOnTable][action] += 0.3*(bargainIndexOnTable*bargainAccepted + 0.9 * np.min(self.qinit[reward]) - self.qinit[reward][action])
+        self.qinit[bargainIndexOnTable][action] += 0.3*(bargainIndexOnTable*bargainAccepted + 0.9 * np.max(self.qinit[bargainIndexOnTable]) - self.qinit[bargainIndexOnTable][action])
 
     def makeOffer(self):
         #returns index of bargain proposal
@@ -71,7 +71,7 @@ class Player:
         #? is the index correct with 0/1
         print("\nPlayer " + str(self.id) +" made the decision of "+ str(index)+" (accepting/rejecting) on the offer of reciving: "+str(self.bargainValues[-(bargainValueIndex+1)]))
         
-        return index
+        return index, correspondentValueIndex
 
         
 

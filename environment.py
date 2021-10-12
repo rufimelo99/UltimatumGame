@@ -1,8 +1,8 @@
 from game.playerRole import playerRole
 from game.ultimatumGame import ultimatumGame
 from game.player import Player
-NPLAYERS = 8
-NITERATIONS = 1
+NPLAYERS = 16
+NITERATIONS = 500
 
 def main():
     game = ultimatumGame(NPLAYERS)
@@ -23,10 +23,10 @@ def main():
         for player in game.Players:
             #player.bargainDecision()
             for neighbour in player.neighbours:
-                playerReward=player.makeOffer()
-                rewardAcceptedOrNot = neighbour.bargainDecision(playerReward)
-                player.qlearningIteration(rewardAcceptedOrNot, playerReward)
-                neighbour.qlearningIteration(rewardAcceptedOrNot, 1-playerReward)
+                playerBargainIndex=player.makeOffer()
+                rewardAcceptedOrNot, neighbourBargainIndex = neighbour.bargainDecision(playerBargainIndex)
+                player.qlearningIteration(rewardAcceptedOrNot, playerBargainIndex)
+                neighbour.qlearningIteration(rewardAcceptedOrNot, neighbourBargainIndex)
     for player in game.Players:
          print(player.qinit)
 
