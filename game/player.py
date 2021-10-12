@@ -11,7 +11,8 @@ class Player:
         self.mapIndexValues = {0: 0, 1: 0.1, 2: 0.2, 3: 0.3, 4:0.4, 5: 0.5, 6: 0.6, 7: 0.7, 8: 0.8, 9: 0.9, 1: 1}
         self.neighbours=[]
         self.AvgComulativePayoff=0
-        self.qinit = np.zeros((len(self.bargainValues), 2))
+        self.qinitProposer = np.zeros((len(self.bargainValues), 2))
+        self.qinitCorrespondent = np.zeros((len(self.bargainValues), 2))
         
         """
                 #payoff per bargain value-> either accept or not
@@ -23,7 +24,7 @@ class Player:
                 .        ]
         """        
 
-    def qlearningIteration(self, bargainAccepted, bargainIndexOnTable):
+    def qlearningIterationProposer(self, bargainAccepted, bargainIndexOnTable):
         #bargainAccepted: 0 or 1 which also works as position in the qinit
         #reward also works as position in qinit
         
@@ -31,7 +32,17 @@ class Player:
         
         action = bargainAccepted
 
-        self.qinit[bargainIndexOnTable][action] += 0.3*(bargainIndexOnTable*bargainAccepted + 0.9 * np.max(self.qinit[bargainIndexOnTable]) - self.qinit[bargainIndexOnTable][action])
+        self.qinitProposer[bargainIndexOnTable][action] += 0.3*(bargainIndexOnTable*bargainAccepted + 0.9 * np.max(self.qinitProposer[bargainIndexOnTable]) - self.qinitProposer[bargainIndexOnTable][action])
+
+    def qlearningIterationCorrespondent(self, bargainAccepted, bargainIndexOnTable):
+        #bargainAccepted: 0 or 1 which also works as position in the qinit
+        #reward also works as position in qinit
+        
+        #need conversion->multiples of 10 that gives position. otherwise, a dic would be recommended
+        
+        action = bargainAccepted
+
+        self.qinitCorrespondent[bargainIndexOnTable][action] += 0.3*(bargainIndexOnTable*bargainAccepted + 0.9 * np.max(self.qinitCorrespondent[bargainIndexOnTable]) - self.qinitCorrespondent[bargainIndexOnTable][action])
 
     def makeOffer(self):
         #returns index of bargain proposal
@@ -41,7 +52,7 @@ class Player:
         #print(self.qinit[:,1])
         #print(np.where(self.qinit[:,1] == np.max(self.qinit[:,1]))[0])
         
-        bargainValueIndex = rnd.choice(np.where(self.qinit[:,1] == np.max(self.qinit[:,1]))[0])     #offer what is best for himself according to its policy
+        bargainValueIndex = rnd.choice(np.where(self.qinitProposer[:,1] == np.max(self.qinitProposer[:,1]))[0])     #offer what is best for himself according to its policy
         #print(aux)
         #print(self.bargainValues[aux])
         
@@ -59,7 +70,7 @@ class Player:
         #model if there was more option other than accepting and rejecting
         #print(self.qinit[reward])
         aux = rnd.choice(2)     #len of options        
-        aux1 = rnd.choice(np.where(self.qinit[correspondentValueIndex] == np.max(self.qinit[correspondentValueIndex]))[0])    #most profitable choice
+        aux1 = rnd.choice(np.where(self.qinitCorrespondent[correspondentValueIndex] == np.max(self.qinitCorrespondent[correspondentValueIndex]))[0])    #most profitable choice
         
         #print("aux: "+str(aux))
         #print("aux1: "+str(aux1))

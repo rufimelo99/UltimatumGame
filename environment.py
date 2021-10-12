@@ -25,10 +25,13 @@ def main():
             for neighbour in player.neighbours:
                 playerBargainIndex=player.makeOffer()
                 rewardAcceptedOrNot, neighbourBargainIndex = neighbour.bargainDecision(playerBargainIndex)
-                player.qlearningIteration(rewardAcceptedOrNot, playerBargainIndex)
-                neighbour.qlearningIteration(rewardAcceptedOrNot, neighbourBargainIndex)
+                player.qlearningIterationProposer(rewardAcceptedOrNot, playerBargainIndex)
+                neighbour.qlearningIterationCorrespondent(rewardAcceptedOrNot, neighbourBargainIndex)
     for player in game.Players:
-         print(player.qinit)
+         print("qinitProposer")
+         print(player.qinitProposer)
+         print("qinitCorrespondent")
+         print(player.qinitCorrespondent)
 
 if __name__ == "__main__":
     main()
