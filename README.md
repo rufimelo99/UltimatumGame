@@ -2,15 +2,17 @@
  
 2 different classes compose the networks
 
-**Player**
+-**Player**
 
-**Ultimatum Game (UG)**
 
 Player( id, PlayerRole)
 
 Player has access to one of three different roles: Empathetic. Pragmatic, Independent.
 
 This role has impact on the q and p strategy.
+
+
+-**Ultimatum Game (UG)**
 
 ultimatumGame( Nplayers, PlayerRole, ScaleFree=False)
 
