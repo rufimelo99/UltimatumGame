@@ -22,6 +22,6 @@ When playing the game:
 
 game.runEpisode(iteration,offersDicInitial,offerDic,thresholdDicInitial,thresholdDic,stopsForGraphs, NaturalSelection=False, SocialPenalty=True)
 
-allows for having Natural Selection has an update rule or not.
+allows for having Natural Selection has an update rule or not. Same for Social Penalty.
 
-Same for Social Penalty "offersDicInitial,offerDic,thresholdDicInitial,thresholdDic" are bassically the dicionaries to store the information (offers p and q values) on a certain selection of rounds
+"offersDicInitial,offerDic,thresholdDicInitial,thresholdDic" are bassically the dicionaries to store the information (offers p and q values) on a certain selection of rounds
