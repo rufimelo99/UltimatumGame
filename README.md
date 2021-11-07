@@ -2,7 +2,7 @@ In the notebook there is 2 different classes compose the networks to replicate S
 <ul>  
 <li>Player</li>  
 <li>Ultimatum Game (UG)</li>  
-</ul># 
+</ul>
 
 
 **Player**
